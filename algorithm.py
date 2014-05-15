@@ -45,4 +45,12 @@ if __name__ == "__main__":
         for _ in range(N):
             t += experimento(5, 2, 1, 0.125)
         e = t / float(N)
-        print e
+
+        s = 0
+        for _ in range(N):
+            t = experimento(5, 2, 1, 0.125) - e
+            s += t * t
+        v = s/float(N-1)
+        print "Esp: " + str(e) + " - Var: " + str(v)
+
+
