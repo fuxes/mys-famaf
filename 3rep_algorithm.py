@@ -43,7 +43,5 @@ if __name__ == "__main__":
         for _ in range(N):
             t = experimento(5, 3, 1, 0.125) - e
             s += t * t
-        v = s/float(N-1)
+        v = pow(s/float(N-1), 0.5)
         print "Esp: " + str(e) + " - Var: " + str(v)
-
-
