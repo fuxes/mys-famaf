@@ -52,8 +52,8 @@ if __name__ == "__main__":
 
         if (N == 10000):
             import matplotlib.pyplot as plt
-            plt.hist(x, 100, normed = 1, facecolor='g', alpha=0.5)
-            plt.axis([0, 10, 0, 0.8])
+            plt.hist(x, 50, normed = 1, facecolor='g', alpha=0.5, range=(0,15))
+            plt.ylim(0,0.5)
             plt.xlabel('Tiempo de falla del sistema')
             plt.ylabel('Proporcion de falla')
             plt.savefig('../img/1op2rep.png', bbox_inches='tight')

@@ -65,7 +65,7 @@ if __name__ == "__main__":
 
         if (N == 10000):
             import matplotlib.pyplot as plt
-            plt.hist(x, 100, normed = 1, facecolor='g', alpha=0.5)
+            plt.hist(x, 100, normed = 1, facecolor='r', alpha=0.5)
             plt.axis([0, 20, 0, 0.8])
             plt.xlabel('Tiempo de falla del sistema')
             plt.ylabel('Proporcion de falla')

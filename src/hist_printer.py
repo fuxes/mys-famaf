@@ -20,9 +20,13 @@ if __name__ == "__main__":
     plt.hist(a, **params)
     plt.hist(b, **params)
     plt.hist(c, **params)
+    plt.figure() # crea uno nuevo
+    # agrgar legend a casa caso
+    add yticks
+    add better conclusions
     """
     plt.hist((a, b, c), **params)
-    plt.legend(["Un tecnico y dos repuestos","Un tecnico y tres repuestos", "Dos tecnicos y dos repuestos"], fontsize=9)
+    plt.legend(["Un tecnico y dos repuestos","Dos tecnicos y dos repuestos", "Un tecnico y tres repuestos"], fontsize=9)
     plt.title('Comparacion')
     plt.xlabel('Tiempo de falla del sistema')
     plt.ylabel('Proporcion de falla')
