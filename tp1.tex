@@ -94,11 +94,11 @@ while True:
         else:
             %*$t^{\star}$*) = %*$\infty$*)
     \end{lstlisting}
-Las funciones auxiliares init y exponencial son definidas a continuaci\'on\footnote{Notar que todas las variables utilizadas est\'an definidas globalmente.}:
+Las funciones auxiliares init y exponencial\footnote{La forma en la que est\'a definida la funcion auxiliar para crear variables aleatorias con distribuci\'on exponencial permite evitar tener tomar como argumento 1 sobre la media.} son definidas a continuaci\'on\footnote{Notar que todas las variables utilizadas est\'an definidas globalmente.}:
     \begin{lstlisting}[caption=Pseudo-c\'odigo del las funciones auxiliares.]
 def init():
     t = r = 0; %*$t^{\star}$*) = %*$\infty$*)
-    exponencial = (lambda x: -math.log(random.random()) * x)
+    exponencial = (lambda x: -log(Uniforme()) * x)
     events = [exponencial(%*$T_f$*)) for _ in range(N)]
     events.sort()
     \end{lstlisting}
@@ -181,39 +181,40 @@ def init():
     \newpage
     \section{Ap\'endice}
     \subsection{Algoritmo para la simulaci\'on con dos operarios}
-    El siguiente algoritmo representa una simulaci\'on del sistema empleando el trabajo de 2 t\'ecnicos.
+    El siguiente algoritmo representa una simulaci\'on del sistema empleando el trabajo de 2 t\'ecnicos.\\
+    Las funciones auxiliares init y exponencial son las mismas definidas para el primer algoritmo:
+
     \begin{lstlisting}[caption=Funciones auxiliares.]
 init()
 while True:
-        if (events[0] < t1_ and events[0] < t2_):
+        if (events[0] < %*$t^{\star}_1$*) and events[0] < %*$t^{\star}_2$*)):
             t = events[0]
-            r += 1
+            r = r + 1
             if (r == S+1):
                 return t;
             else:
-                x = exponencial(Tf)
-                events[0] = t + x repuesto
+                events[0] = t + exponencial(%*$T_f$*))
                 events.sort()
-                if (t1_ == inf):
-                    t1_ = t + exponencial(Tr)
+                if (%*$t^{\star}_1$*) == %*$\infty$*)):
+                    %*$t^{\star}_1$*) = t + exponencial(%*$T_r$*))
                     continue
-                if (t2_ == inf):
-                    t2_ = t + exponencial(Tr)
+                if (%*$t^{\star}_2$*) == %*$\infty$*)):
+                    %*$t^{\star}_2$*) = t + exponencial(%*$T_r$*))
 
-        elif (events[0] >= t1_):
-            t = t1_
-            r -= 1
-            if ((r > 1 and t2_ != inf) or (t2_ == inf and r > 0)):
-                t1_ = t + exponencial(Tr)
+        elif (events[0] >= %*$t^{\star}_1$*)):
+            t = %*$t^{\star}_1$*)
+            r = r - 1
+            if ((r > 1 and %*$t^{\star}_2$*) != %*$\infty$*)) or (%*$t^{\star}_2$*) == %*$\infty$*) and r > 0)):
+                %*$t^{\star}_1$*) = t + exponencial(%*$T_r$*))
             else:
-                t1_ = inf
+                %*$t^{\star}_1$*) = %*$\infty$*)
 
-        elif (events[0] >= t2_):
-            t = t2_
-            r -= 1
-            if ((r > 1 and t1_ != inf) or (t1_ == inf and r > 0)):
-                t2_ = t + exponencial(Tr)
+        elif (events[0] >= %*$t^{\star}_2$*)):
+            t = %*$t^{\star}_2$*)
+            r = r - 1
+            if ((r > 1 and %*$t^{\star}_1$*) != %*$\infty$*)) or (%*$t^{\star}_1$*) == %*$\infty$*) and r > 0)):
+                %*$t^{\star}_2$*) = t + exponencial(%*$T_r$*))
             else: 
-                t2_ = inf
+                %*$t^{\star}_2$*) = %*$\infty$*)
     \end{lstlisting}
 \end{document}
