@@ -33,11 +33,15 @@ def experimento(N, S, Tf, Tr):
                 t_ = float("inf")
 
 if __name__ == "__main__":
+    x = []
     for N in [100, 1000, 10000]:
-        t = 0
+        t = e = 0
         for _ in range(N):
-            t += experimento(5, 2, 1, 0.125)
-        e = t / float(N)
+            t = experimento(5, 2, 1, 0.125)
+            if (N == 10000):
+                x.append(t)
+            e += t 
+        e = e / float(N)
 
         s = 0
         for _ in range(N):
@@ -46,4 +50,10 @@ if __name__ == "__main__":
         v = pow(s/float(N-1), 0.5)
         print "Esp: " + str(e) + " - Var: " + str(v)
 
-
+        if (N == 10000):
+            import matplotlib.pyplot as plt
+            plt.hist(x, 100, normed = 1, facecolor='g', alpha=0.5)
+            plt.axis([0, 10, 0, 0.8])
+            plt.xlabel('Tiempo de falla del sistema')
+            plt.ylabel('Proporcion de falla')
+            plt.savefig('../img/1op2rep.png', bbox_inches='tight')
