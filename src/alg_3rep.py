@@ -52,8 +52,11 @@ if __name__ == "__main__":
 
         if (N == 10000):
             import matplotlib.pyplot as plt
-            plt.hist(x, 100, normed = 1, facecolor='b', alpha=0.5)
-            plt.axis([0, 20, 0, 0.8])
-            plt.xlabel('Tiempo de falla del sistema')
-            plt.ylabel('Proporcion de falla')
+            plt.hist(x, 50, normed = 1, facecolor='r', alpha=0.5, range=(0,15))
+            plt.ylim(0,0.6)
+            plt.xticks([0,0.5,1,1.5,2,3,5,7.5,10], fontsize=10, rotation='vertical')
+            plt.xlabel('Tiempo de falla del sistema', fontsize=10)
+            plt.ylabel('Proporcion de falla', fontsize=10)
+            plt.legend(["Un tecnico y tres repuestos"], fontsize=10)
             plt.savefig('../img/1op3rep.png', bbox_inches='tight')
+            plt.show()

@@ -1,9 +1,16 @@
 % article example for classicthesis.sty
+
+%\documentclass[a4paper,11pt]{book}
 \documentclass[10pt,a4paper]{article} % KOMA-Script article scrartcl
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{url}
-\usepackage[nochapters]{classicthesis}
+\usepackage[T1]{fontenc}
+\usepackage[linedheaders,parts,pdfspacing,nochapters]{classicthesis}
 
 \usepackage{listings}
 \lstset{
@@ -33,26 +40,23 @@
 
 
 \begin{document}
-    \title{Trabajo Especial I}
-    \author{Carlos Mart\'in Becerra}
-    \date{\today} % no date
-    
+
+\title{\Huge \textbf{Trabajo Especial I} \\ 
+        \huge Modelos y Simulaci\'on}
+% Author
+\author{\textsc{Carlos Mart\'in Becerra}}
+
     \maketitle
     
+    \newpage
     \tableofcontents
     
     \newpage
     \section{Introducci\'on}
     \subsection{Descripci\'on del problema}
     Un lavadero de ropa autom\'atico cuenta con 5 m\'aquinas en servicio en funcionamiento constante. Como las m\'aquinas lavadoras se rompen peri\'odicamente, el lugar cuenta 2 m\'aquinas de repuesto, todas ellas id\'enticas entre s\'i. A su vez el lavadero cuenta con el servicio t\'ecnico de reparaci\'on provisto por un solo operario. El mismo solo puede arreglar una m\'aquina a la vez.\\
-    Este sistema fallar\'a en el momento que no se encuentren 5 m\'aquinas en funcionamiento, o equivalentemente, que el t\'ecnico deba arreglar m\'as de dos m\'aquinas.\\
-    Teniendo en cuenta todo esta informaci\'on, el due\~no del lavadero desea determinar los siguientes puntos:
-
-    \begin{itemize}
-    \item El tiempo promedio que transcurre hasta que el lavadero deja de ser operativo, es decir, que falla el sistema.
-    \item Si tiempo promedio que transcurre hasta que el lavadero falla mejora agregando un t\'ecnico u otra m\'aquina de repuesto.
-    \end{itemize}
-    
+    Este sistema fallar\'a en el momento que no se encuentren 5 m\'aquinas en funcionamiento, o lo que es equivalente, que el t\'ecnico deba arreglar m\'as de dos m\'aquinas.\bigskip\\ 
+    Teniendo en cuenta todo esta informaci\'on, el due\~no del lavadero desea determinar el tiempo promedio que transcurre hasta que el lavadero deja de ser operativo, es decir, que falla el sistema. Luego de esto, el due\~no desea saber si el tiempo promedio que transcurre hasta que el lavadero falla mejora agregando un t\'ecnico u otra m\'aquina de repuesto con el fin de invertir en la mejor opci\'on.\bigskip\\ 
     Para ello simularemos un modelo de reparaci\'on. Los tiempos de funcionamiento de las m\'aquinas hasta descomponerse est\'an determinados con respecto a una variable aleatoria de distribuci\'on exponencial con un tiempo medio hasta fallar de $T_f$, y que tiempo que les lleva a las m\'aquinas ser reparadas por el t\'ecnico es determinado por una variable aleatoria exponencial con tiempo medio igual a $T_r$, estas variables son independientes entre s\'i.
     
     \newpage
@@ -103,9 +107,11 @@ def init():
     events.sort()
     \end{lstlisting}
     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \newpage
     \section{Resultados}
-    En primer lugar analizaremos el funcionamiento del sistema inicial, para luego hacer una comparaci\'on del funcionamiento del mismo cuando se agrega un operario y cuando se agrega una m\'aquina de repuesto. Esto nos permitir\'a llegar a una conclusi\'on fundamentada sobre que es lo m\'as conveniente para el due\~no del lavadero al momento de tomar una decisi\'on.
+    En primer lugar analizaremos el funcionamiento del sistema inicial, para luego hacer una comparaci\'on del funcionamiento del mismo cuando se agrega un operario y cuando se agrega una m\'aquina de repuesto.\\
+    Finalmente, esto nos permitir\'a superponer los graficos generados en cada ocasi\'on para llegar a una conclusi\'on fundamentada sobre que es lo m\'as conveniente para el due\~no del lavadero al momento de tomar una decisi\'on.
     
     \subsection{Sistema con un t\'ecnico y dos repuestos}
     A continuaci\'on se muestra un histograma con los valores de 10000 simulaciones de tiempos de fallo del sistema funcionando con 2 m\'aquinas de repuesto y 1 solo operario.
@@ -114,7 +120,7 @@ def init():
     \includegraphics[width=12cm] {img/1op2rep}
     \end {figure}
     
-    El gr\'afico hace evidente que lo m\'as probable es que el sistema falle entre el primer y segundo mes de funcionamiento. Tambi\'en se complementa al gr\'afico la siguiente tabla con los resultados del tiempo promedio de falla y la variaci\'on del mismo luego de haber realiado 100, 1000 y 10000 iteraciones.
+    El gr\'afico hace evidente que hay una mayor probabilidad de que el sistema falle entre el primer y segundo mes de funcionamiento en comparaci\'on a los meses siguientes. Tambi\'en se complementa al gr\'afico la siguiente tabla con los resultados del tiempo promedio de falla y la variaci\'on del mismo luego de haber realiado 100, 1000 y 10000 iteraciones.
     
     \begin{center}
         \begin{tabular}{ c| c| c}
@@ -134,7 +140,7 @@ def init():
     \includegraphics[width=12cm] {img/1op3rep}
     \end {figure}
 
-    Ahora con la incorporaci\'on de otra m\'aquina lavadora que puede ser utilizada como repuesto, podemos ver que la periodicidad con la cual falla el sistema ahora se encuentra m\'as distribuida, haciendo as\'i que sea m\'as probable que el sistema pueda funcionar durante m\'as tiempo. El gr\'afico muestra que hay m\'as posibilidades de que el sistema dure m\'as de un mes en funcionamiento. \\
+    Ahora con la incorporaci\'on de otra m\'aquina lavadora que puede ser utilizada como repuesto, podemos ver que la periodicidad con la cual falla el sistema ahora se encuentra m\'as distribuida que el caso anterior, haciendo as\'i que sea m\'as probable que el sistema pueda funcionar durante m\'as tiempo que el caso anterior. El gr\'afico muestra que hay m\'as posibilidades de que el sistema dure m\'as de un mes en funcionamiento. \\
     Se complementa al gr\'afico la siguiente tabla con los resultados del tiempo promedio de falla y la variaci\'on del mismo luego de haber realizado 100, 1000 y 10000 iteraciones.
     
     \begin{center}
@@ -154,7 +160,7 @@ def init():
     \includegraphics[width=12cm] {img/2op2rep}
     \end {figure}
 
-    En el caso de incorporar la participaci\'on de otro t\'ecnico de reparaci\'on al sistema, se puede notar que hay cierta similitud a cuando solo tenemos un solo operario, ya que sigue habiendo lo m\'as probables es que el sistema falle dentro de los primeros dos meses, solo que ahora esta probabilidad se ha dilatado en los meses que contin\'uan. Haciendo as\'i que el sistema llegue a durar m\'as. \\
+    En el caso de incorporar la participaci\'on de otro t\'ecnico de reparaci\'on en el sistema, se puede notar que hay cierta similitud a cuando solo tenemos un solo operario, ya que la probabilidad de fallar en los primeros dos meses es mayor que el resto a la probabilidad de fallar los meses siguientes, solo que ahora la masa acumulada disminuye en los primeros meses, haciendo que esta probabilidad se distribuya en los meses que siguen. Haciendo as\'i que el tiempo medio de duraci\'on del sistema hasta fallar sea mayor. \\
     Se complementa al gr\'afico la siguiente tabla con los resultados del tiempo promedio de falla y la variaci\'on del mismo luego de haber realizado 100, 1000 y 10000 iteraciones.
     
     \begin{center}
@@ -184,7 +190,7 @@ def init():
     El siguiente algoritmo representa una simulaci\'on del sistema empleando el trabajo de 2 t\'ecnicos.\\
     Las funciones auxiliares init y exponencial son las mismas definidas para el primer algoritmo:
 
-    \begin{lstlisting}[caption=Funciones auxiliares.]
+    \begin{lstlisting}[caption=Algoritmo para dos t\'ecnicos.]
 init()
 while True:
         if (events[0] < %*$t^{\star}_1$*) and events[0] < %*$t^{\star}_2$*)):
