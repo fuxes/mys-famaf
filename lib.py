@@ -41,7 +41,7 @@ def prom(g, a, b, N=100, T=10000):
 geom = lambda p: math.floor(math.log(random.random()) / math.log(1-p)) + 1
 
 #VA Poisson
-def Poisson(lamb):
+def poisson(lamb):
 	i = 0
 	p = math.exp(-lamb)
 	F = p
@@ -52,9 +52,29 @@ def Poisson(lamb):
 		i += 1
 	return i
 
+# exp con rate lamb
+expva = lambda l: -1/float(l) * math.log(random.random()) 
+
+# Returns 2 Normals VAs
+def twoStandardNormals():
+	s = 1
+	while (s > 1):
+		u = random.random()
+		v = random.random()
+		x = 2 * u - 1 
+		y = 2 * v - 1
+		s = x * x + y * y
+	p = math.sqrt(-2 * math.log(s) / float(s))
+	return p * x, p * y
+
 """
 Metodos
 """
+# Inverse transform algorithm
+"""
+X = F^-1(U) then x = F(x) = x^n => despejar x
+"""
+
 # Aceptacion y rechazo
 def ayr(q, p, c):
 	t = True
@@ -63,3 +83,28 @@ def ayr(q, p, c):
 		u = unif(0,1)
 		t = (u < p(Y)/float(c * q(Y)))
 	return Y
+
+"""
+GEN PROC DE Poisson
+"""
+# T Time units of Poisson Proccess w/ Rate Lambd
+def poissonProccess(lamb, T):
+	t = 0
+	s = []
+	while (t <= T):
+		u = random.random()
+		t -= 1/float(lamb) * math.log(u)
+		s.append(t)
+	return s
+
+# T time units of a Nonhomogeneous Poisson Process
+def nonhomogeneousPoissonProccess(lamb, T, flamb):
+	t = 0
+	s = []
+	while (t <= T):
+		u = random.random()
+		t -= 1/float(lamb) * math.log(u)
+		y = random.random()
+		if (y <= flamb(t) / float(lamb)):
+			s.append(t)
+	return s
