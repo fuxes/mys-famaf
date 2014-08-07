@@ -2,6 +2,12 @@ import math
 import random
 import numpy
 
+"""	 RESOURCES
+p-value calculator for chi-square test: http://www.danielsoper.com/statcalc3/calc.aspx?id=11
+
+"""
+
+
 """
 INTEGRACION POR MONTE CARLO
 """
@@ -83,6 +89,23 @@ def ayr(q, p, c):
 		u = unif(0,1)
 		t = (u < p(Y)/float(c * q(Y)))
 	return Y
+
+# Transformada Inversa
+def transformadaInversa(p):
+	i = 0
+	F = p[0]
+	u = random.random()
+	while (u < F):
+		i += 1
+		F += p[i]
+	return i
+
+# Metodo de composicion
+def composicion(alp, x, y):
+	if (random.random() < alp):
+		return x
+	else:
+		return y
 
 """
 GEN PROC DE Poisson
